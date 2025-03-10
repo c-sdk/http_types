@@ -5,7 +5,7 @@
   "description": "HTTP types available on the IANA.org.",
   "license": "unlicense",
   "keyworkds": ["http", "methods", "fields", "headers", "types", "statuses", "http status", "http methods", "http header field names"],
-  "src": ["./http_statuses.h", "./http_fields.h", "./http_methods.h", "./http_types.h"],
+  "src": ["./http_statuses.h", "./http_headers.h", "./http_methods.h", "./http_types.h"],
   "dependencies": {
     "jwerle/fs.c": "*",
     "c-sdk/csv": "*",
