@@ -53,9 +53,11 @@ void render_statuses(struct csv_t *csv) {
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
     if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0) {
-      fprintf(output, "// #define HTTP_STATUS_%s \"%s\"\n", row[0], row[0]);
+      fprintf(output, "// #define HTTP_STATUS_CODE_%s \"%s\"\n", row[0], row[0]);
+      fprintf(output, "// #define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", row[1], row[1]);
     } else {
-      fprintf(output, "#define HTTP_STATUS_%s %s\n", row[0], row[0]);
+      fprintf(output, "#define HTTP_STATUS_CODE_%s %s\n", row[0], row[0]);
+      fprintf(output, "#define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", row[1], row[1]);
     }
   }
 
