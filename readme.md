@@ -1,8 +1,5 @@
 # http_types
 
-> [!WARNING]
-> Still in development.
-
 Resources names available on the IANA.
 
 ## Hypertext Transfer Protocol (HTTP) Status Code Registry

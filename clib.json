@@ -1,6 +1,6 @@
 {
   "name": "http_types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repo": "c-sdk/http_types",
   "description": "HTTP types available on the IANA.org.",
   "license": "unlicense",
