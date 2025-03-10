@@ -1,0 +1,7 @@
+-std=c17
+-I.
+-I./deps/arena
+-I./deps/fs
+-I./deps/csv
+-I./deps/strchrepl
+
