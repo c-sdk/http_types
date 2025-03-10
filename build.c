@@ -55,7 +55,7 @@ void render_statuses(struct csv_t *csv) {
     if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0) {
       fprintf(output, "// #define HTTP_STATUS_%s \"%s\"\n", row[0], row[0]);
     } else {
-      fprintf(output, "#define HTTP_STATUS_%s \"%s\"\n", row[0], row[0]);
+      fprintf(output, "#define HTTP_STATUS_%s %s\n", row[0], row[0]);
     }
   }
 
