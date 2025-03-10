@@ -52,13 +52,21 @@ void render_statuses(struct csv_t *csv) {
 
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
-    if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0) {
-      fprintf(output, "// #define HTTP_STATUS_CODE_%s \"%s\"\n", row[0], row[0]);
-      fprintf(output, "// #define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", row[1], row[1]);
+    char* name = strdup(row[1]);
+    (void)strchrepl(name, ' ', '_');
+    (void)strchrepl(name, '-', '_');
+    if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0 ||
+        memcmp(row[1], "(Unused)", strlen("(Unused)")) == 0 ||
+        memcmp(row[0], "105", strlen("105")) == 0 ||
+        memcmp(row[0], "104", strlen("104")) == 0 ||
+        memcmp(row[0], "510", strlen("510")) == 0) {
+      fprintf(output, "// #define HTTP_STATUS_%s \"%s\"\n", row[0], row[0]);
+      fprintf(output, "// #define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", name, row[1]);
     } else {
-      fprintf(output, "#define HTTP_STATUS_CODE_%s %s\n", row[0], row[0]);
-      fprintf(output, "#define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", row[1], row[1]);
+      fprintf(output, "#define HTTP_STATUS_%s %s\n", row[0], row[0]);
+      fprintf(output, "#define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", name, row[1]);
     }
+    free(name);
   }
 
   fprintf(output, "\n#endif // __HTTP_TYPES_STATUSES__\n");
