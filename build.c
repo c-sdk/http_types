@@ -30,7 +30,7 @@ void render_headers(struct csv_t *csv) {
 
   fprintf(output, "#ifndef __HTTP_TYPES_HEADERS__\n");
   fprintf(output, "#define __HTTP_TYPES_HEADERS__ 1\n\n");
-  
+
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
     char* name = strdup(row[0]);
@@ -49,7 +49,7 @@ void render_statuses(struct csv_t *csv) {
 
   fprintf(output, "#ifndef __HTTP_TYPES_STATUSES__\n");
   fprintf(output, "#define __HTTP_TYPES_STATUSES__ 1\n\n");
-  
+
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
     if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0) {
