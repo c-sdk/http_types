@@ -8,7 +8,7 @@
 #include "strchrepl.h"
 
 void render_methods(struct csv_t *csv) {
-  FILE* output = fs_open("./http_method.h", "w");
+  FILE* output = fs_open("./http_methods.h", "w");
 
   fprintf(output, "#ifndef __HTTP_TYPES_METHODS__\n");
   fprintf(output, "#define __HTTP_TYPES_METHODS__ 1\n\n");
