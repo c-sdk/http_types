@@ -35,6 +35,7 @@ void render_headers(struct csv_t *csv) {
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
     char* name = strdup(row[0]);
+    struppercase(name);
     (void)strchrepl(name, '-', '_');
     fprintf(output, "#define HTTP_HEADER_%s \"%s\"\n", name, row[0]);
     free(name);
