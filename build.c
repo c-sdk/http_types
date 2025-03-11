@@ -6,6 +6,7 @@
 #include "csv.h"
 #include "fs.h"
 #include "strchrepl.h"
+#include "struppercase.h"
 
 void render_methods(struct csv_t *csv) {
   FILE* output = fs_open("./http_methods.h", "w");
@@ -36,7 +37,7 @@ void render_headers(struct csv_t *csv) {
     char* name = strdup(row[0]);
     (void)strchrepl(name, '-', '_');
     fprintf(output, "#define HTTP_HEADER_%s \"%s\"\n", name, row[0]);
-    // free(name);
+    free(name);
   }
 
   fprintf(output, "\n#endif // __HTTP_TYPES_HEADERS__\n");
@@ -55,16 +56,17 @@ void render_statuses(struct csv_t *csv) {
     char* name = strdup(row[1]);
     (void)strchrepl(name, ' ', '_');
     (void)strchrepl(name, '-', '_');
+    struppercase(name);
     if (memcmp(row[1], "Unassigned", strlen("Unassigned")) == 0 ||
         memcmp(row[1], "(Unused)", strlen("(Unused)")) == 0 ||
         memcmp(row[0], "105", strlen("105")) == 0 ||
         memcmp(row[0], "104", strlen("104")) == 0 ||
         memcmp(row[0], "510", strlen("510")) == 0) {
       fprintf(output, "// #define HTTP_STATUS_%s \"%s\"\n", row[0], row[0]);
-      fprintf(output, "// #define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", name, row[1]);
+      fprintf(output, "// #define HTTP_STATUS_%s \"%s\"\n", name, row[1]);
     } else {
       fprintf(output, "#define HTTP_STATUS_%s %s\n", row[0], row[0]);
-      fprintf(output, "#define HTTP_STATUS_DESCRIPTION_%s \"%s\"\n", name, row[1]);
+      fprintf(output, "#define HTTP_STATUS_%s \"%s\"\n", name, row[1]);
     }
     free(name);
   }
@@ -76,7 +78,7 @@ void render_statuses(struct csv_t *csv) {
 
 int build(char* filename, void (*render)(struct csv_t*)) {
   arena_t arena = {0};
-  arena_create(&arena, 4096 * 8);
+  arena_create(&arena, 4096 * 16);
 
   struct csv_t csv = {0};
 

@@ -10,6 +10,7 @@
     "jwerle/fs.c": "*",
     "c-sdk/csv": "*",
     "c-sdk/arena": "*",
-    "c-sdk/strchrepl": "*"
+    "c-sdk/strchrepl": "*",
+    "c-sdk/struppercase": "*"
   }
 }

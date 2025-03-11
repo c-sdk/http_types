@@ -4,4 +4,5 @@
 -I./deps/fs
 -I./deps/csv
 -I./deps/strchrepl
+-I./deps/struppercase
 

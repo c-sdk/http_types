@@ -3,7 +3,7 @@
 CC?=clang
 
 CFLAGS = -g -I. -I./deps/arena -I./deps/fs -I./deps/csv
-CFLAGS+= -I./deps/utf8 -I./deps/strchrepl
+CFLAGS+= -I./deps/utf8 -I./deps/strchrepl -I./deps/struppercase
 
 SOURCES = $(wildcard *.c)
 SOURCES+= $(wildcard deps/arena/*.c)
@@ -11,6 +11,7 @@ SOURCES+= $(wildcard deps/fs/*.c)
 SOURCES+= $(wildcard deps/csv/*.c)
 SOURCES+= $(wildcard deps/utf8/*.c)
 SOURCES+= $(wildcard deps/strchrepl/*.c)
+SOURCES+= $(wildcard deps/struppercase/*.c)
 OBJECTS=$(SOURCES:%.c=%.o)
 
 PROGRAM=build
