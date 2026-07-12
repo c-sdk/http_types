@@ -16,7 +16,11 @@ void render_methods(struct csv_t *csv) {
 
   for (size_t i = 1; i < csv->row_count - 1; ++i) {
     char** row = csv_row(csv, i);
-    fprintf(output, "#define HTTP_METHODS_%s \"%s\"\n", row[0], row[0]);
+    char* name = strdup(row[0]);
+    struppercase(name);
+    (void)strchrepl(name, '-', '_');
+    fprintf(output, "#define HTTP_METHODS_%s \"%s\"\n", name, row[0]);
+    free(name);
   }
 
   fprintf(output, "\n#endif // __HTTP_TYPES_METHODS__\n");
